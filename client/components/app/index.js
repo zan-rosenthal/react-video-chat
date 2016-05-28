@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {} from './style.less'
+import {} from './style.less';
 
 class App extends Component {
 
