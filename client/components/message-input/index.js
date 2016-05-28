@@ -6,7 +6,7 @@ class MessageEntryBox extends Component {
   }
 
   handleKeyPress(e){
-    if(ev.which === 13) {
+    if(e.which === 13) {
       this.props.onSubmit();
       e.preventDefault();
     }
