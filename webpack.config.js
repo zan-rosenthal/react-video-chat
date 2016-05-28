@@ -6,6 +6,7 @@ module.exports = {
   entry: './index.js',
   output: {
     path: __dirname,
+    publicPath: '/',
     filename: 'bundle.js'
   },
   module:{
@@ -15,8 +16,12 @@ module.exports = {
         include: CLIENT_DIR,
         loader: 'babel-loader',
         query: {
-          presets: ['es2016', 'react']
+          presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
       }
     ]
   },
@@ -24,6 +29,9 @@ module.exports = {
     alias: {
       components: path.resolve(CLIENT_DIR, 'components')
     }
-  }
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
   }
 }
