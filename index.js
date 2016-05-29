@@ -3,7 +3,7 @@ import server from './server';
 var config = {};
 
 if(process.env.NODE_ENV === 'development'){
-  config.port = 8080;
+  config.port = 3000;
   config.host ='localhost';
   server.locals.assetPath = 'http://localhost:8080/';
   server.locals.isDevelopment = true;

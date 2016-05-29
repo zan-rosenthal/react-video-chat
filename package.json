@@ -4,9 +4,8 @@
   "description": "A messaging and video conference app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "client dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "start": "babel-node server"
+     "start-dev": "NODE_ENV=development nodemon --exec babel-node index.js -e js,handlebars",
+     "webpack-dev": "babel-node webpack.development.js"
   },
   "repository": {
     "type": "git",

@@ -17,6 +17,7 @@ class MessageEntryBox extends Component {
       <div className="message-input">
         <textarea
           name="message"
+          placeholder = 'Enter a message'
           value = {this.props.value}
           onChange={this.handleChange.bind(this)}
           onKeyPress = {this.handleKeyPress.bind(this)}
