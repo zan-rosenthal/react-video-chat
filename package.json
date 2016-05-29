@@ -4,8 +4,8 @@
   "description": "A messaging and video conference app",
   "main": "index.js",
   "scripts": {
-     "start-dev": "NODE_ENV=development nodemon --exec babel-node index.js -e js,handlebars",
-     "webpack-dev": "babel-node webpack.development.js"
+    "start-dev": "NODE_ENV=development nodemon --exec babel-node index.js -e js,handlebars",
+    "webpack-dev": "babel-node webpack.development.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "socket.io": "^1.4.6"
   }
 }
