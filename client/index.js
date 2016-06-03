@@ -7,7 +7,8 @@ import reducers from 'reducers';
 import startChat, { chatMiddleware } from './chat';
 
 const initialState = window.INITIAL_STATE;
-const store = createStore(reducers(initialState));
+const createStoreWithMiddleware = applyMiddleware(chatMiddleware)(createStore);
+const store = createStoreWithMiddleware(reducers(initialState));
 
 startChat(store);
 

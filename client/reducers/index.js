@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import { UPDATE_MESSAGE, ADD_MESSAGE, ADD_RESPONSE } from 'actions/message-actions';
 
-export default funciton(initialState){
-  function messages (currentMessages = initialState.messages, aciton){
-    const messages = ccurrentMessages.map(message => Object.assign({}, message));
+export default function(initialState){
+  function messages (currentMessages = initialState.messages, action){
+    const messages = currentMessages.map(message => Object.assign({}, message));
+    console.log('messages in reducers', currentMessages)
 
-    switch(action.typ){
+    switch(action.type){
       case ADD_RESPONSE:
         messages.push(Object.assign({}, action.message));
         break;
@@ -19,7 +20,7 @@ export default funciton(initialState){
   function currentMessage (currentMessage = initialState.currentMessage, action){
     switch(action.type){
       case UPDATE_MESSAGE:
-        return aciton.message;
+        return action.message;
       case ADD_MESSAGE:
         return '';
       default:
@@ -28,28 +29,4 @@ export default funciton(initialState){
   }
 
   return combineReducers({currentMessage, messages});
-}
-
-
-export default function(initialState){
-  return (state = initialState, action) => {
-    switch (action.type){
-      case UPDATE_MESSAGE:
-        return Object.assign({}, state, { currentMessage: action.message });
-      case ADD_MESSAGE:
-        const text = state.currentMessage.trim();
-
-        if (text){
-          let messages = state.messages.map(message => Object.assign({}, message));
-          messages.push( {id: messages.length+1, text});
-
-          return{
-            messages,
-            currentMessage: ''
-          }
-        }
-      default:
-        return state;
-    }
-  }
 }

@@ -1,45 +1,19 @@
-import path from 'path';
-import express from 'express';
-import handlebars from 'express-handlebars';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import App from './generated/app'
+import server from './server';
+import http from 'http';
+import socketServer from './socket-server';
 
-const app = express();
-const port = process.env.PORT || 3000;
+var config = {};
 
-//Views
-app.engine('handlebars', handlebars({
-  defaultLayout: 'main',
-  layoutsDir: path.resolve(__dirname, 'views/layouts')
-}));
-app.set('view engine', 'handlebars');
-app.set('views', path.resolve(__dirname, 'views'));
+if(process.env.NODE_ENV === 'development'){
+  config.port = 3000;
+  config.host ='localhost';
+  server.locals.assetPath = 'http://localhost:8080/';
+  server.locals.isDevelopment = true;
+}
 
-//Static assets
-app.use(express.static(path.resolve(__dirname, '../dist')))
-
-//Routes
-app.get('/', (request, response) => {
-  const initialState = {
-    currentMessage: '',
-    messages: []
-  };
-
-  const store = createStore((state = initialState) => state);
-
-  const appContent = ReactDOMServer.renderToString(
-    <Provider store = {store} >
-        <App />
-    </Provider>
-  );
-
-  response.render('app', {
-    app:appContent,
-    initialState: JSON.stringify(initialState)
-  });
+const webServer = server.listen (config.port, config.host, (err)=>{
+  if(err) throw  err;
+  console.log('Web server listening at http://%s:%d', config.host, config.port);
 });
 
-export default app;
+socketServer(webServer);
